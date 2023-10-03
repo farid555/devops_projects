@@ -1,5 +1,5 @@
 # Logs
-.DS_Store
+
 logs
 *.log
 npm-debug.log*
@@ -23,6 +23,16 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+**/.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # nyc test coverage
 .nyc_output
