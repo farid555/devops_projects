@@ -1,0 +1,44 @@
+Vagrant installation-
+sudo mkdir /usr/local/bin  
+brew uninstall --cask vagrant
+brew install --cask vagrant
+
+vagrant init ubuntu/jammy64 (ubuntu) //https://app.vagrantup.com/ubuntu/boxes/jammy64
+vagrant init eurolinux-vagrant/centos-stream-9  //https://app.vagrantup.com/eurolinux-vagrant/boxes/centos-stream-9
+
+vagrant up (run)
+vagrant ssh (login)
+vagrant halt (off)
+vagrant reload
+vagrant status
+vagrant global--status
+
+whoami (what user you are)
+pwd (where you are?)
+ls (current directory)
+cat /etc/os-release (cat read a file)
+sudo -i (switch vagrant user to root user)
+[vagrant@localhost(localhost-hostname)( ~ ) you are in the home directory]$ ($ normal user shell)
+[vagrant@localhost ~]# (hash means root user shell)
+/root (this is root user home directory)
+/ (root directory)
+cd /(the root user which is home directory)
+cd (back home directory)
+cd / (root directory top level linux)
+cd /bin
+ls
+cd /sbin
+ls
+cd /etc/ (configuration)
+
+Some Important Directories
+>Home Directories: /root, /home/username,
+>User Executable: /bin, /usr/bin, /usr/local/bin,
+>System Executable: /sbin, /user/bin,
+>Other Mountpoints: /media, /mnt
+>Configuration: /etc
+>Temporary Files:/tmp
+>Kernels and Bootloader: /boot 
+>Server Data: /var, /
+>Server information: /proc, /sys
+>Shared Libraries: /lib, /use/lib, /usr/local/lib
