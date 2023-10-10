@@ -1,0 +1,67 @@
+sudo apt update
+sudo apt install apache2 \
+                 ghostscript \
+                 libapache2-mod-php \
+                 mysql-server \
+                 php \
+                 php-bcmath \
+                 php-curl \
+                 php-imagick \
+                 php-intl \
+                 php-json \
+                 php-mbstring \
+                 php-mysql \
+                 php-xml \
+                 php-zip -y
+
+sudo mkdir -p /srv/www
+sudo chown www-data: /srv/www
+curl https://wordpress.org/latest.tar.gz | sudo -u www-data tar zx -C /srv/www
+
+Create Apache site for WordPress. Create /etc/apache2/sites-available/wordpress.conf with following lines:
+
+<VirtualHost *:80>
+    DocumentRoot /srv/www/wordpress
+    <Directory /srv/www/wordpress>
+        Options FollowSymLinks
+        AllowOverride Limit Options FileInfo
+        DirectoryIndex index.php
+        Require all granted
+    </Directory>
+    <Directory /srv/www/wordpress/wp-content>
+        Options FollowSymLinks
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+sudo a2ensite wordpress
+sudo a2enmod rewrite
+sudo a2dissite 000-default
+
+sudo mysql -u root
+CREATE DATABASE wordpress;
+CREATE USER wordpress@localhost IDENTIFIED BY 'admin123';
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON wordpress.* TO wordpress@localhost;
+FLUSH PRIVILEGES;
+quit
+
+sudo -u www-data cp /srv/www/wordpress/wp-config-sample.php /srv/www/wordpress/wp-config.php
+sudo -u www-data sed -i 's/database_name_here/wordpress/' /srv/www/wordpress/wp-config.php
+sudo -u www-data sed -i 's/username_here/wordpress/' /srv/www/wordpress/wp-config.php
+sudo -u www-data sed -i 's/admin123/<your-password>/' /srv/www/wordpress/wp-config.php
+
+sudo -u www-data nano /srv/www/wordpress/wp-config.php
+
+define('AUTH_KEY',         'rcylmyEvqxBfYF( d=<|9Rz?~eAq2NQBhFDuQWRD!cSwNl=(Oe _+2-hj%24Zc`f');
+define('SECURE_AUTH_KEY',  'ZLR90WJ:vs~p`QgGUH]!:4szj]y,t`|W2cLPDII?V~t.b@}$PaC5FW[!M+}a4Lc}');
+define('LOGGED_IN_KEY',    'is~T+v+bN-xfS>D+}XEUp~{6yA&#^n4r0)*Y:b,G-^npC&o65Za}J99$i,0*{ 17');
+define('NONCE_KEY',        '<d3t&chXknllfhx^%YV|o]>BkT`Pag{/=^ARdyO.r3+e{G2xK*Oih|4)Y2.K($FG');
+define('AUTH_SALT',        '|EX|Bk@gZZQ$FQDbN9k KtvfZ;P@w!I!nxQ4nkVPtA|))x* !0p/uL:WZ{6k/o!+');
+define('SECURE_AUTH_SALT', '3lRvB/).3,d#2[<3#Nt]C#!wN=vrcW%^E~D~;bJ8V@-rsF*=e}|$cP#^Cq+^`I&-');
+define('LOGGED_IN_SALT',   'EL-+`H6Jv!=595L*gSn.Yw[YoR;tDP6vTpKcLN@:^|FDGaRA,.020~&oLIu|b&cn');
+define('NONCE_SALT',       '}Q0?@>Y4e9I+I=$9O[woJm@dKrRR>Bwq#c5^l:D38pFoSbdec/+TL#0dk[{*?`Lg');
+
+
+###install wordpress###
+mohammad_uzzaman
+^#vGBRxpX*3RRjvL$o

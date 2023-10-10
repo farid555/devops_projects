@@ -42,3 +42,35 @@ Some Important Directories
 >Server Data: /var, /
 >Server information: /proc, /sys
 >Shared Libraries: /lib, /use/lib, /usr/local/lib
+
+
+-rm -rf *
+-sudo yum install vim -y
+:se nu (vim Line number)
+
+File type First Character in File Listing Description
+
+Regular -
+directory d 
+Link l 
+special file c 
+Socket s
+Pipe p
+
+___________________________
+            GREP [Filter]
+___________________________
+
+grep firewall anaconda-ks.cfg (filter firewall from anaconda-ks.cfg)
+grep -iR firewall * (filter firewall from all directories)
+grep -R SELINUX /etc/*
+grep -vi firewall anaconda-ks.cfg (reverse search)
+less (reader)
+
+cut -d: -f1 /etc/passwd (split : column)
+%s/coronavirus/covid19/g ((vim) change coronavirus to covid19 in everywhere g is global)
+%s/covid19//g 
+
+free -m (Physical ram)
+df -h (Harddisk parttion)
+echo (print command)
